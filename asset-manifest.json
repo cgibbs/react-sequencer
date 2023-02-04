@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-sequencer/static/css/main.336c6e9e.css",
-    "main.js": "/react-sequencer/static/js/main.8e03ea79.js",
+    "main.css": "/react-sequencer/static/css/main.2259f695.css",
+    "main.js": "/react-sequencer/static/js/main.ec1ec23f.js",
     "static/media/SD.wav": "/react-sequencer/static/media/SD.f2d05166483ebd4c5d0a.wav",
     "static/media/BD.wav": "/react-sequencer/static/media/BD.740bcc3cfbbc767d108c.wav",
     "static/media/HH.wav": "/react-sequencer/static/media/HH.4c15cd4ba8cb6ca218a7.wav",
     "index.html": "/react-sequencer/index.html",
-    "main.336c6e9e.css.map": "/react-sequencer/static/css/main.336c6e9e.css.map",
-    "main.8e03ea79.js.map": "/react-sequencer/static/js/main.8e03ea79.js.map"
+    "main.2259f695.css.map": "/react-sequencer/static/css/main.2259f695.css.map",
+    "main.ec1ec23f.js.map": "/react-sequencer/static/js/main.ec1ec23f.js.map"
   },
   "entrypoints": [
-    "static/css/main.336c6e9e.css",
-    "static/js/main.8e03ea79.js"
+    "static/css/main.2259f695.css",
+    "static/js/main.ec1ec23f.js"
   ]
 }
