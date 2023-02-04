@@ -8,7 +8,10 @@ import {Howl} from 'howler';
 
 function Step(props) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button className={
+      "square" + 
+      ((props.step % 2 === 0) ? " even" : " odd")
+    } onClick={props.onClick}>
       {props.value ? 1 : 0}
     </button>
   )
@@ -33,6 +36,8 @@ class SequencerRow extends React.Component {
   renderStep(i) {
     return (
       <Step 
+        step={i}
+        stepNumber={this.state.stepNumber}
         value={this.state.sequencer[i]} 
         onClick={() => this.handleClick(i)}
       />
@@ -72,9 +77,6 @@ class Game extends React.Component {
       stepNumber: 0,
     }
 
-    // this.kickSound = new Audio(BD);
-    // this.snareSound = new Audio(SD);
-    // this.hatSound = new Audio(HH);
     this.kickSound = new Howl({
       src: BD,
     })
@@ -118,21 +120,19 @@ class Game extends React.Component {
     this.setState({
       stepNumber: (this.state.stepNumber + 1) % 16,
     })
-    console.log(this.state);
+    this.render();
   }
 
   handleInputChange = event => {
     const bpm = event.target.value;
 
     if (this.state.playing) {
-      // stop old timer and start a new one
       clearInterval(this.timer);
       this.timer = setInterval(() => this.playSounds(), (15 / bpm) * 1000);
       this.setState({
         bpm
       });
     } else {
-      // otherwise, just update the bpm
       this.setState({ bpm });
     }
   };
@@ -145,23 +145,26 @@ class Game extends React.Component {
             <span>
               KICK: 
             <SequencerRow 
+              stepNumber={this.state.stepNumber}
               sequencer={this.state.sequencers.kickSeq}
             />
             </span>
             <span>
               SNARE:
             <SequencerRow 
+              stepNumber={this.state.stepNumber}
               sequencer={this.state.sequencers.snareSeq}
             />
             </span>
             <span>
               HAT:
             <SequencerRow 
+              stepNumber={this.state.stepNumber}
               sequencer={this.state.sequencers.hatSeq}
             />
             </span>
           </div>
-          <button onClick={this.startStop}>
+          <button className="startStop" onClick={this.startStop}>
             Start/Stop
           </button>
         </div>

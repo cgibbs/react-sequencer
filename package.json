@@ -1,6 +1,6 @@
 {
   "name": "sequencer-react",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://cgibbs.github.io/react-sequencer",
   "private": true,
   "dependencies": {

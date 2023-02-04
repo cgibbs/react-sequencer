@@ -53,3 +53,11 @@ ol, ul {
   width: 50%;
   margin: 10px;
 }
+
+.even {
+  background-color: #CCC;
+}
+
+.startStop {
+  margin-left: 10px;
+}
