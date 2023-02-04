@@ -4,7 +4,7 @@ import './index.css';
 import BD from './assets/BD.wav';
 import SD from './assets/SD.wav';
 import HH from './assets/HH.wav';
-import {Howl, Howler} from 'howler';
+import {Howl} from 'howler';
 
 function Step(props) {
   return (
@@ -23,9 +23,10 @@ class SequencerRow extends React.Component {
   }
 
   handleClick(i) {
-    this.state.sequencer[i] = !this.state.sequencer[i];
+    let seq = this.state.sequencer
+    seq[i] = !seq[i];
     this.setState({
-      sequencer: this.state.sequencer
+      sequencer: seq
     })
   }
 
@@ -120,34 +121,62 @@ class Game extends React.Component {
     console.log(this.state);
   }
 
+  handleInputChange = event => {
+    const bpm = event.target.value;
+
+    if (this.state.playing) {
+      // stop old timer and start a new one
+      clearInterval(this.timer);
+      this.timer = setInterval(() => this.playSounds(), (15 / bpm) * 1000);
+      this.setState({
+        bpm
+      });
+    } else {
+      // otherwise, just update the bpm
+      this.setState({ bpm });
+    }
+  };
+
   render() {
     return (
-      <div className="game">
-        <div className="game-board">
+      <div>
+        <div className="game">
+          <div className="game-board">
+            <span>
+              KICK: 
+            <SequencerRow 
+              sequencer={this.state.sequencers.kickSeq}
+            />
+            </span>
+            <span>
+              SNARE:
+            <SequencerRow 
+              sequencer={this.state.sequencers.snareSeq}
+            />
+            </span>
+            <span>
+              HAT:
+            <SequencerRow 
+              sequencer={this.state.sequencers.hatSeq}
+            />
+            </span>
+          </div>
+          <button onClick={this.startStop}>
+            Start/Stop
+          </button>
+        </div>
+        <div className="bpm-slider">
           <span>
-            KICK: 
-          <SequencerRow 
-            sequencer={this.state.sequencers.kickSeq}
-          />
-          </span>
-          <span>
-            SNARE:
-          <SequencerRow 
-            sequencer={this.state.sequencers.snareSeq}
-          />
-          </span>
-          <span>
-            HAT:
-          <SequencerRow 
-            sequencer={this.state.sequencers.hatSeq}
-          />
+            <p>{this.state.bpm} BPM</p>
+            <input
+              type="range"
+              min="60"
+              max="240"
+              value={this.state.bpm}
+              onChange={this.handleInputChange}
+            />
           </span>
         </div>
-        <div className="game-info">
-        </div>
-        <button onClick={this.startStop}>
-          Start/Stop
-        </button>
       </div>
     );
   }

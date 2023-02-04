@@ -48,3 +48,8 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+
+.bpm-slider input {
+  width: 50%;
+  margin: 10px;
+}
